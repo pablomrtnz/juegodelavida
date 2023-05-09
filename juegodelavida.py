@@ -1,12 +1,11 @@
-
 import copy, random, sys, time
 
 # Constantes
-ANCHO = 79   # Ancho de la cuadrícula
-ALTO = 20  # Alto de la cuadrícula
+ANCHO = int(input("Ingresa el ancho de la cuadrícula: "))  # Ancho de la cuadrícula
+ALTO = int(input("Ingresa el alto de la cuadrícula: "))  # Alto de la cuadrícula
 
-VIVO = 'O'  # Carácter para la celda viva
-MUERTO = ' '   # Carácter para la celda muerta
+VIVO = input("Ingresa el carácter para indicar una célula viva: ")  # Carácter para la celda viva
+MUERTO = ' '  # Carácter para la celda muerta
 
 # Las variables celulas y siguientesCelulas son diccionarios que contienen
 # el estado actual del juego y el siguiente.
@@ -39,7 +38,7 @@ while True:  # bucle principal del programa
     for x in range(ANCHO):
         for y in range(ALTO):
             # Obtenemos las coordenadas de las vecinas incluso si están en el límite
-            izquierda  = (x - 1) % ANCHO
+            izquierda = (x - 1) % ANCHO
             derecha = (x + 1) % ANCHO
             arriba = (y - 1) % ALTO
             abajo = (y + 1) % ALTO
@@ -67,10 +66,10 @@ while True:  # bucle principal del programa
             # de los valores actuales
             if celulas[(x, y)] == VIVO and (numVecinasVivas == 2
                                             or numVecinasVivas == 3):
-                    # Cálulas vivas con 2 o 3 vecinas vivas permanecen vivas
-                    siguientesCelulas[(x, y)] = VIVO
-            elif celulas[(x, y)] == MUERTO and numVecinasVivas == 3:
-                # Células muertas con 3 vecinas vivas cobran vida
+                # Células vivas con 2 o 3 vecinas vivas permanecen vivas
+                siguientesCelulas[(x, y)] = VIVO
+            elif celulas[(x, y)] == MUERTO and numVecinasVivas >= 2:
+                # Células muertas con 2 o más vecinas vivas cobran vida
                 siguientesCelulas[(x, y)] = VIVO
             else:
                 # En cualquier otro caso continuan muertas
